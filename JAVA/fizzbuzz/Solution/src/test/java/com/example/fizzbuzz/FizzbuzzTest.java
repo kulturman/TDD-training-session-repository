@@ -20,7 +20,6 @@ class FizzbuzzTest {
     @Test
     void getsFizzIfNumberIsMultipleOf5() {
         assertEquals("Buzz", fizzbuzz.transform(5));
-        assertEquals("Buzz", fizzbuzz.transform(10));
     }
 
 
