@@ -52,4 +52,11 @@ class SoundexTest {
     void encodesAdjacentLettersThatEncodesToTheSameDigitOnce() {
         assertEquals("A100", soundex.encode("ABBBBBB"));
     }
+
+    @Test
+    void encodesLettersOnceIfTheyEncodeToSameDigitAndSeparatedByHWOrY() {
+        assertEquals("A100", soundex.encode("ABHB"));
+        assertEquals("A100", soundex.encode("ABWB"));
+        assertEquals("A100", soundex.encode("AByB"));
+    }
 }

@@ -14,13 +14,16 @@ public class Soundex {
 
     private String encodeWordTail(String word, String encodedWord) {
         StringBuilder result = new StringBuilder(encodedWord);
-
         var wordTail = wordTail(word);
         var lastEncodedLetter = "";
 
         for (int i = 0; i < wordTail.length(); i++) {
             if (isComplete(result))
                 break;
+
+            if (letterIsNonEncodingConsonant(wordTail.charAt(i))) {
+                continue;
+            }
 
             if (doesNotEncodeToSameValue(wordTail.charAt(i), lastEncodedLetter)) {
                 result.append(encodeLetter(wordTail.charAt(i)));
@@ -30,6 +33,13 @@ public class Soundex {
         }
 
         return result.toString();
+    }
+
+    private static boolean letterIsNonEncodingConsonant(char letter) {
+        return switch (Character.toLowerCase(letter)) {
+            case 'h', 'w', 'y' -> true;
+            default -> false;
+        };
     }
 
     private boolean doesNotEncodeToSameValue(char letter, String lastEncodedLetter) {
